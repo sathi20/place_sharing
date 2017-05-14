@@ -1,0 +1,17 @@
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <div>
+    <h2>Locations you have shared:</h2>
+    <ul>
+      <%= render @locations %>
+    </ul>
+    <%= link_to 'Share a New Location', new_location_path, class: 'btn btn-primary' %>
+    
+    <h2>Locations shared with you:</h2>
+    <ul>
+      <%= render partial: 'location', collection: @shared_locations %>
+    </ul>
+  </div>
+</div>
+
+

@@ -1,0 +1,25 @@
+<%= link_to 'Back', locations_path, class: 'btn btn-primary' %>
+<div>
+  <h2><%= @location.name %></h2>
+  <p><%= @location.address %></p>
+  <% if @location.is_public? %>
+    <p>Shared publicly</p>
+  <% else %>
+    <p><strong>Shared with friends</strong> <%= @location.get_friends %></p>
+  <% end %>
+</div>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+  });
+</script>
